@@ -47,7 +47,6 @@ func main() {
 		case <-time.After(time.Duration(*limit) * time.Second):
 			fmt.Println("timeout")
 		}
-
 	}
 
 	fmt.Printf("your score is %d \n", score)
