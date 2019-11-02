@@ -2,21 +2,28 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net/http"
+	"urlshortner/urlshort"
 )
 
-func handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "hello world")
-}
-
-func redirectToYoutube(w http.ResponseWriter, r *http.Request) {
-	http.Redirect(w, r, "https://youtube.com", 301)
-}
-
 func main() {
-	http.HandleFunc("/", handler)
-	http.HandleFunc("/youtube", redirectToYoutube)
+	mux := defaultMux()
 
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	pathsToUrls := map[string]string{
+		"/go": "https://gophercises.com/exercises/urlshort",
+	}
+	mapHandler := urlshort.MapHandler(pathsToUrls, mux)
+
+	fmt.Println("Starting the server on :8080")
+	http.ListenAndServe(":8080", mapHandler)
+}
+
+func defaultMux() *http.ServeMux {
+	mux := http.NewServeMux()
+	mux.HandleFunc("/", hello)
+	return mux
+}
+
+func hello(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintln(w, "Hello, world!")
 }
