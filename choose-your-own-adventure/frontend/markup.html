@@ -1,0 +1,19 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>choose your own adventure</title>
+  <link rel="stylesheet" href="styles.css?v=1.0">
+
+</head>
+
+<body>
+  <h1>{{.Title}}</h1>	
+  <p>{{.Story}}</p>
+  {{range .Options}}
+  <a href="/?chaptername={{.ChapterName}}">{{.Text}}</a><br />
+  {{end}}
+</body>
+</html>
