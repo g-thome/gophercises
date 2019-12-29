@@ -10,10 +10,40 @@
 </head>
 
 <body>
+  <style>
+    h1 {
+      font-size: 30px;
+      text-align: center;
+    }
+
+    hr {
+      border-color: rgba(128, 128, 128, 0.144);
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+    }
+
+    .caixa-bege {
+      border-color: rgb(218, 214, 214);
+      border-width: 1px;
+      border-style: solid;
+      background-color: #fcf7ec;
+      box-shadow: 0px 10px 5px -5px grey;
+      width: 650px;
+      padding: 40px;
+    }
+  </style>
+
+  <div class="caixa-bege">
   <h1>{{.Title}}</h1>	
-  <p>{{.Story}}</p>
-  {{range .Options}}
-  <a href="/?chaptername={{.ChapterName}}">{{.Text}}</a><br />
+  {{range .Story}}
+    <p>{{.}}</p>
   {{end}}
+  {{range .Options}}
+    <a href="/?chaptername={{.ChapterName}}">{{.Text}}</a><br />
+  {{end}}
+  </div>
 </body>
 </html>
